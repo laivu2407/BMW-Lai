@@ -1,0 +1,48 @@
+
+
+import React, { useState } from 'react';
+
+function AddBookForm() {
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [isbn, setIsbn] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    if (title && author && isbn) {
+      const newBook = { title, author, isbn };
+      saveBookToJson(newBook);
+      setSuccessMessage('File saved successfully');
+      
+      setTitle('');
+      setAuthor('');
+      setIsbn('');
+    } else {
+      alert('Please fill in all fields');
+    }
+  };
+
+  const saveBookToJson = (bookData) => {
+    
+  };
+
+  return (
+    <div>
+      <h2>Add a New Book</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Title:</label>
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <label>Author:</label>
+        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} />
+        <label>ISBN:</label>
+        <input type="text" value={isbn} onChange={(e) => setIsbn(e.target.value)} />
+        <button type="submit">Add Book</button>
+      </form>
+      {successMessage && <p>{successMessage}</p>}
+    </div>
+  );
+}
+
+export default AddBookForm;
